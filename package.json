@@ -11,6 +11,8 @@
   "engines": {
     "node": "*"
   },
-  "dependencies": {},
+  "dependencies": {
+    "rest.node": "0.1.0"
+  },
   "devDependencies": {}
 }
