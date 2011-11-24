@@ -22,7 +22,7 @@ A simple Facebook API for Node.js
     console.log('Nice to meet you ' + user.name + '!');
   });
 
-  client.graphEach('me/friends', function(friend) {
+  client.graph_each('me/friends', function(friend) {
     console.log('I know ' + friend.name);
   }, function(err, count) {
     if (err) {
