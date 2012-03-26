@@ -62,4 +62,8 @@ Facebook.prototype.graph_each = function(method, options, itemCallback, completi
   });
 };
 
+Facebook.prototype.fql = function(query, callback) {
+  this.get('fql', {access_token: this.key, q: query}, callback);
+};
+
 module.exports = Facebook;
