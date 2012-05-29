@@ -2,7 +2,7 @@
   "name": "facebook.node",
   "description": "Facebook API Client",
   "author": "Matt Insler <matt.insler@gmail.com> (www.mattinsler.com)",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": {
     "type": "git",
     "url": "git://github.com/mattinsler/facebook.node.git"

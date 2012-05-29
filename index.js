@@ -63,7 +63,8 @@ Facebook.prototype.graph_each = function(method, options, itemCallback, completi
 };
 
 Facebook.prototype.fql = function(query, callback) {
-  this.get('fql', {access_token: this.key, q: query}, callback);
+  var q = typeof(query) === 'string' ? query : JSON.stringify(query);
+  this.get('fql', {access_token: this.key, q: q}, callback);
 };
 
 module.exports = Facebook;
