@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/mattinsler/facebook.node.png)](http://travis-ci.org/mattinsler/facebook.node)
 # facebook.node
 
 A simple Facebook API for Node.js
