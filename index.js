@@ -9,6 +9,14 @@ function Facebook(key) {
 
 util.inherits(Facebook, Rest);
 
+Facebook.prototype.convertArray = function(name, array) {
+  var h = {};
+  for (var i = 0; i < array.length; i++ ) {
+    h[name + "[" + i + "]"] = array[i];
+  }
+  return h;
+}
+
 // paging (limit,offset / until,since)
 Facebook.prototype.graph = function(method, options, callback) {
   if ('function' === typeof(options)) {
@@ -34,6 +42,17 @@ Facebook.prototype.post_graph = function(method, options, callback) {
   if ('function' === typeof(options)) {
     callback = options;
     options = {};
+  }
+
+  if (typeof (options) === "object") {
+    var self = this;
+    _.each(_.keys(options), function(key) {
+      if (_.isArray(options[key])){
+        var converted =  self.convertArray(key, options[key]);
+        delete options[key];
+        _.extend(options, converted);
+      }
+    });
   }
 
   options.access_token = this.key;
@@ -64,23 +83,9 @@ Facebook.prototype.graph_each = function(method, options, itemCallback, completi
 };
 
 Facebook.prototype.fql = function(query, callback) {
-  if (typeof (query) === "object") {
-    _.each(_.keys(query), function(key) {
-      if (_.isArray(query[key])){
-        query[key] = this.convertArray(key, query[key]);
-      }
-    });
-  }
   var q = typeof(query) === 'string' ? query : JSON.stringify(query);
   this.get('fql', {access_token: this.key, q: q}, callback);
 };
 
-Facebook.prototype.convertArray = function(name, array) {
-  var h = {};
-  for (var i = 0; i < array.length; i++ ) {
-    h[name + "[" + i + "]"] = array[i];
-  }
-  return h;
-}
 
 module.exports = Facebook;
