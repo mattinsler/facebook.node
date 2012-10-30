@@ -4,9 +4,38 @@ var util = require('util'),
 function Facebook(key) {
   Rest.call(this, 'https://graph.facebook.com');
   this.key = key;
+  this.debug = true;
 }
 
 util.inherits(Facebook, Rest);
+
+urlencode = function(val, prefix) {
+  var arr, k, v;
+  if (prefix == null) {
+    prefix = '';
+  }
+  arr = [];
+  for (k in val) {
+    v = val[k];
+    if ((prefix != null) && prefix !== '') {
+      k = "" + prefix + "[" + k + "]";
+    }
+    if (Array.isArray(v)) {
+      Array.prototype.push.apply(arr, v.map(function(i, idx) {
+        return "" + k + "[" + idx + "]=" + (encodeURIComponent(i));
+      }));
+    } else if (typeof v === 'object' && Object.prototype.toString(v) === '[object Object]') {
+      arr.push(urlencode(v, k));
+    } else {
+      arr.push(k + '=' + encodeURIComponent(v));
+    }
+  }
+  return arr.join('&');
+};
+
+Facebook.prototype.createQuerystring = function(opts) {
+  return urlencode(opts);
+};
 
 // paging (limit,offset / until,since)
 Facebook.prototype.graph = function(method, options, callback) {
