@@ -4,7 +4,6 @@ var util = require('util'),
 function Facebook(key) {
   Rest.call(this, 'https://graph.facebook.com');
   this.key = key;
-  this.debug = true;
 }
 
 util.inherits(Facebook, Rest);
