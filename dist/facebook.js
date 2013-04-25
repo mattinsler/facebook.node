@@ -33,12 +33,16 @@
       }
     };
 
-    function Facebook(access_token) {
+    function Facebook(opts) {
+      var _ref;
+      if (opts == null) {
+        opts = {};
+      }
       Facebook.__super__.constructor.call(this, {
-        base_url: 'https://graph.facebook.com'
+        base_url: (_ref = opts.base_url) != null ? _ref : 'https://graph.facebook.com'
       });
-      if (access_token != null) {
-        this.hook('pre:request', Facebook.hooks.access_token(access_token));
+      if (opts.access_token != null) {
+        this.hook('pre:request', Facebook.hooks.access_token(opts.access_token));
       }
       this.hook('pre:request', Facebook.hooks.opts_to_query_string);
     }
