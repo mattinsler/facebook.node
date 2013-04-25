@@ -34,12 +34,11 @@
     };
 
     function Facebook(opts) {
-      var _ref;
       if (opts == null) {
         opts = {};
       }
       Facebook.__super__.constructor.call(this, {
-        base_url: (_ref = opts.base_url) != null ? _ref : 'https://graph.facebook.com'
+        base_url: opts.base_url || 'https://graph.facebook.com'
       });
       if (opts.access_token != null) {
         this.hook('pre:request', Facebook.hooks.access_token(opts.access_token));
@@ -60,7 +59,7 @@
     };
 
     Facebook.prototype.fql = function(query, cb) {
-      if (typeof query === 'string') {
+      if (typeof query !== 'string') {
         query = JSON.stringify(query);
       }
       return this.get('fql', {

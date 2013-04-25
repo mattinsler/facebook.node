@@ -12,7 +12,7 @@ class Facebook extends Rest
       request_opts.qs[k] = v for k, v of opts
   
   constructor: (opts = {}) ->
-    super(base_url: opts.base_url ? 'https://graph.facebook.com')
+    super(base_url: opts.base_url or 'https://graph.facebook.com')
     
     @hook('pre:request', Facebook.hooks.access_token(opts.access_token)) if opts.access_token?
     @hook('pre:request', Facebook.hooks.opts_to_query_string)
@@ -22,7 +22,7 @@ class Facebook extends Rest
   delete_graph: (path, opts, cb) -> @delete(path, opts, cb)
   
   fql: (query, cb) ->
-    query = JSON.stringify(query) if typeof query is 'string'
+    query = JSON.stringify(query) unless typeof query is 'string'
     @get('fql', {q: query}, cb)
 
 module.exports = Facebook
