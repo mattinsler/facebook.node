@@ -12,7 +12,7 @@ class Facebook extends Rest
       request_opts.qs[k] = v for k, v of opts
   
   constructor: (opts = {}) ->
-    super(base_url: opts.base_url or 'https://graph.facebook.com')
+    super(base_url: opts.base_url or 'http://social-api.unifiedsocial.com/v1/fb')
     
     @hook('pre:request', Facebook.hooks.access_token(opts.access_token)) if opts.access_token?
     @hook('pre:request', Facebook.hooks.opts_to_query_string)
