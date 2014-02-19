@@ -38,7 +38,7 @@
         opts = {};
       }
       Facebook.__super__.constructor.call(this, {
-        base_url: opts.base_url || 'http://social-api.unifiedsocial.com/v1/fb'
+        base_url: opts.base_url || 'https://social-api.unifiedsocial.com/v1/fb'
       });
       if (opts.access_token != null) {
         this.hook('pre:request', Facebook.hooks.access_token(opts.access_token));
