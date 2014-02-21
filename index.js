@@ -2,7 +2,7 @@ var util = require('util'),
     Rest = require('rest.node');
 
 function Facebook(key) {
-  Rest.call(this, 'https://social-api.unifiedsocial.com/v1/fb');
+  Rest.call(this, process.env.FB_URL);
   this.key = key;
 }
 
