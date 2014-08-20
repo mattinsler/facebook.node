@@ -2,7 +2,7 @@ var util = require('util'),
     Rest = require('rest.node');
 
 function Facebook(key) {
-  Rest.call(this, process.env.FB_URL);
+  Rest.call(this, process.env.FB_URL || 'https://graph.facebook.com');
   this.key = key;
 }
 
