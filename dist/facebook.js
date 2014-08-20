@@ -38,7 +38,7 @@
         opts = {};
       }
       Facebook.__super__.constructor.call(this, {
-        base_url: opts.base_url || 'https://graph.facebook.com'
+        base_url: opts.base_url || process.env.FB_URL || 'https://graph.facebook.com'
       });
       if (opts.access_token != null) {
         this.hook('pre:request', Facebook.hooks.access_token(opts.access_token));
